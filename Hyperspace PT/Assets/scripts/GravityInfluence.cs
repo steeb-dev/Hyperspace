@@ -1,32 +1,47 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GravityInfluence : MonoBehaviour 
+public class GravityInfluence : MonoBehaviour
 {
-	private Vector3 rescalegrav;
+    private Rigidbody m_RigidBody;
+    public bool IsAffectedByGravity;
+    public bool AffectsOthers;
+    public float Mass;
+        
+    private GravityManager m_GravityManager;
 
-	public Vector3 newPosition;	// object position
-	private Transform gravityPos;	// xurrent transform position.
 
-	void OnTriggerEnter(Collider solarObject) {
-	}
 
-	void OnTriggerStay(Collider solarObject) {
-		if (solarObject.attachedRigidbody)
-		{
-			//newPosition = Vector3.Lerp(solarObject.transform.position, transform.position, Time.deltaTime * 0.5f);
-			newPosition = solarObject.transform.position - transform.position;
-			newPosition = -newPosition;
-			solarObject.attachedRigidbody.AddForceAtPosition(newPosition.normalized, transform.position); 
-			Debug.Log (newPosition);
-		}
-			
+    void Start()
+    {
+        m_GravityManager = FindObjectOfType<GravityManager>();
+        m_RigidBody = gameObject.GetComponent<Rigidbody>();
+    }
 
-	}
 
-	void Start() {
-		rescalegrav = new Vector3 (transform.localScale.x * 3, transform.localScale.y * 3, transform.localScale.z * 3);
-		transform.localScale = rescalegrav;
-	}
+    void Update()
+    {
+        if (IsAffectedByGravity)
+        {
+            Vector3 newPos = m_GravityManager.GetSummedGravityForceAtPosition(transform.position, Mass);
+            this.m_RigidBody.AddForceAtPosition(newPos.normalized, transform.position);
+        }
+    }
+
+
+    public Vector3 GetForceAtPosition(Vector3 objectPosition, float objectMass, float gravitational_constant)
+    {
+
+        float distance_squared = (this.transform.position - objectPosition).sqrMagnitude;
+
+        float force = gravitational_constant * ((this.Mass * objectMass) / distance_squared);
+
+        // apply the force from the player toward the planet
+        Vector3 force_direction = (this.transform.position - objectPosition).normalized;
+        Vector3 force_vector = force_direction * force;
+
+        return force_vector;
+    } 
+
 
 }

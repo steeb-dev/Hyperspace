@@ -5,27 +5,37 @@ using UnityEngine;
 
 public class GravityManager : MonoBehaviour
 {
-    public List<GravityEffector> m_ActiveGravityEffectors = new List<GravityEffector>();
-    
+    public List<GravityInfluence> m_ActiveGravityInfluences = new List<GravityInfluence>();
+    public float gravitational_constant = 100f;
+
+    void Start()
+    { UpdateGravityEffectors(); }
+
     //Refresh collection of effectors
     public void UpdateGravityEffectors()
     {
-        m_ActiveGravityEffectors.Clear();
-        GravityEffector[] activeEffectors = FindObjectsOfType<GravityEffector>();
-        foreach (GravityEffector ge in activeEffectors)
+        m_ActiveGravityInfluences.Clear();
+        GravityInfluence[] activeEffectors = FindObjectsOfType<GravityInfluence>();
+        foreach (GravityInfluence gi in activeEffectors)
         {
-
-            m_ActiveGravityEffectors.Add(ge);
+            if (gi.AffectsOthers)
+            {
+                m_ActiveGravityInfluences.Add(gi);
+            }
         }
     }
 
     public Vector3 GetSummedGravityForceAtPosition(Vector3 objectPosition, float mass)
     {
         Vector3 finalForce = objectPosition;
-        foreach (GravityEffector ge in m_ActiveGravityEffectors)
+        foreach (GravityInfluence gi in m_ActiveGravityInfluences)
         {
-            Vector3 addForce = ge.GetForceAtPosition(objectPosition, mass);
-            finalForce += addForce;
+            //if they're in the same spot ignore cos probably the same object
+            if (gi.transform.position != objectPosition)
+            {
+                Vector3 addForce = gi.GetForceAtPosition(objectPosition, mass, gravitational_constant);
+                finalForce += addForce;
+            }
         }
         return finalForce;
     }
