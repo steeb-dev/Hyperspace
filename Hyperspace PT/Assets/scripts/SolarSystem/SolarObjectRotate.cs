@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SystemRotate : MonoBehaviour
+public class SolarObjectRotate : MonoBehaviour
 {
 	public Vector3 axis;
 	public float period;

@@ -9,7 +9,9 @@ public class GravityManager : MonoBehaviour
     public float gravitational_constant = 100f;
 
     void Start()
-    { UpdateGravityEffectors(); }
+    {
+        UpdateGravityEffectors();
+    }
 
     //Refresh collection of effectors
     public void UpdateGravityEffectors()
@@ -25,6 +27,11 @@ public class GravityManager : MonoBehaviour
         }
     }
 
+    internal Vector3 GetSummedGravityForceAtPosition(object v, object objectPosition)
+    {
+        throw new NotImplementedException();
+    }
+
     public Vector3 GetSummedGravityForceAtPosition(Vector3 objectPosition, float mass)
     {
         Vector3 finalForce = objectPosition;
@@ -35,6 +42,7 @@ public class GravityManager : MonoBehaviour
             {
                 Vector3 addForce = gi.GetForceAtPosition(objectPosition, mass, gravitational_constant);
                 finalForce += addForce;
+
             }
         }
         return finalForce;

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerControl : MonoBehaviour
+public class PlayerControlA : MonoBehaviour
 {
 	public float power = 500f;
 

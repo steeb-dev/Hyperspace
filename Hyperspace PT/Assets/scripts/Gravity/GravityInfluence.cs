@@ -23,6 +23,7 @@ public class GravityInfluence : MonoBehaviour
     {
         if (IsAffectedByGravity)
         {
+            
             Vector3 newPos = m_GravityManager.GetSummedGravityForceAtPosition(transform.position, Mass);
             this.m_RigidBody.AddForceAtPosition(newPos.normalized, transform.position);
         }
@@ -41,7 +42,13 @@ public class GravityInfluence : MonoBehaviour
         Vector3 force_vector = force_direction * force;
 
         return force_vector;
-    } 
+    }
 
-
+    void OnDrawGizmos()
+    {
+        Vector3 newPos2 = m_GravityManager.GetSummedGravityForceAtPosition(transform.position, Mass);
+        Gizmos.color = new Color(1, 0, 0, 0.5F);
+        Gizmos.DrawCube(newPos2, new Vector3(1, 1, 1));
+    }
 }
+
