@@ -23,7 +23,6 @@ public class GravityInfluence : MonoBehaviour
     {
         if (IsAffectedByGravity)
         {
-            
             Vector3 newPos = m_GravityManager.GetSummedGravityForceAtPosition(transform.position, Mass);
             this.m_RigidBody.AddForceAtPosition(newPos.normalized, transform.position);
         }

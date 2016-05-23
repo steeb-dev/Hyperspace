@@ -3,20 +3,19 @@ using System.Collections;
 
 public class SolarObjectRotate : MonoBehaviour
 {
-	public Vector3 axis;
-	public float period;
+    public float period;
+    public int radius = 20;
+    Vector3 ObjectToDockPos; // reference gameobject position
 
-
-	// Use this for initialization
-	void Start ()
-	{
-		axis = axis.normalized;
-	}
-	
-	// Update is called once per frame
 	void Update ()
 	{
-		transform.Rotate(axis, 360 * Time.deltaTime / period);
-
+        OrbitParent();
 	}
+
+    void OrbitParent()
+    {
+        ObjectToDockPos = transform.parent.position;
+        transform.RotateAround(ObjectToDockPos, Vector3.up, radius * Time.deltaTime);
+    }
 }
+

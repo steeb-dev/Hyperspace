@@ -6,7 +6,7 @@ using UnityEngine;
 public class GravityManager : MonoBehaviour
 {
     public List<GravityInfluence> m_ActiveGravityInfluences = new List<GravityInfluence>();
-    public float gravitational_constant = 100f;
+    public float gravitational_constant = 10f;
 
     void Start()
     {
@@ -34,7 +34,7 @@ public class GravityManager : MonoBehaviour
 
     public Vector3 GetSummedGravityForceAtPosition(Vector3 objectPosition, float mass)
     {
-        Vector3 finalForce = objectPosition;
+        Vector3 finalForce = objectPosition * 0;
         foreach (GravityInfluence gi in m_ActiveGravityInfluences)
         {
             //if they're in the same spot ignore cos probably the same object
@@ -47,4 +47,6 @@ public class GravityManager : MonoBehaviour
         }
         return finalForce;
     }
+
+
 }
