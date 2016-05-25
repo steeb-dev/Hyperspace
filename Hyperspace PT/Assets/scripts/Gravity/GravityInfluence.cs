@@ -7,7 +7,7 @@ public class GravityInfluence : MonoBehaviour
     public bool IsAffectedByGravity;
     public bool AffectsOthers;
     public float Mass;
-        
+
     private GravityManager m_GravityManager;
 
 
@@ -42,12 +42,4 @@ public class GravityInfluence : MonoBehaviour
 
         return force_vector;
     }
-
-    void OnDrawGizmos()
-    {
-        Vector3 newPos2 = m_GravityManager.GetSummedGravityForceAtPosition(transform.position, Mass);
-        Gizmos.color = new Color(1, 0, 0, 0.5F);
-        Gizmos.DrawCube(newPos2, new Vector3(1, 1, 1));
-    }
 }
-

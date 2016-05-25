@@ -6,6 +6,8 @@ public class PlayerInteract : MonoBehaviour {
     GravityInfluence gi_ObjectToDock; // required to set orbit distance based on mass
     SpaceCraftTurretManager sctm_DockingTrigger;
     TurretControl tc_EnableTurret;
+    CameraPlayerFollow cpf_SwitchTarget;
+
 
     bool b_DockSolarObject; //Planets
     bool b_DockObject; //SpaceCraft
@@ -23,7 +25,8 @@ public class PlayerInteract : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetMouseButtonDown(0))        {   MouseDown();    }
+        if (Input.GetMouseButtonDown(1)) { MouseDown(); }
+        if (Input.GetMouseButtonDown(0))        {   Fire();    }
         if (b_DockSolarObject)      {   DockSolarObject();    }
         if (b_DockObject) { DockObject(); }
     }
@@ -36,21 +39,23 @@ public class PlayerInteract : MonoBehaviour {
         if (Physics.Raycast(ray, out hit))
         {
             if (hit.transform.tag == "DockableSolarObject" && !b_DockSolarObject) {
-                go_ObjectToDock = hit.transform.gameObject; // define object that was clicked
-                b_DockSolarObject = true;
-            }
-           // else if (hit.transform.tag == "DockableSolarObject" && b_DockSolarObject) { b_DockSolarObject = false;}
+                    go_ObjectToDock = hit.transform.gameObject; // define object that was clicked
+                    b_DockSolarObject = true;
+                }
 
             if (hit.transform.tag == "DockableObject" && !b_DockObject)
-            {
-                go_ObjectToDock = hit.transform.gameObject; // define object that was clicked
-                Debug.Log("Clicked Cruiser");
-                //sctm_DockingTrigger.DockingTrigger(transform.gameObject); // send gameobject(playerobject) that wants to dock to SpaceCraftTurretManager DockingTrigger<>
-                b_DockObject = true; // set that object is now docked
-            }
-            //else if (hit.transform.tag == "DockableObject" && b_DockObject) { b_DockObject = false; }
+                {
+                    go_ObjectToDock = hit.transform.gameObject; // define object that was clicked
+                    Debug.Log("Clicked Cruiser");
+                    //sctm_DockingTrigger.DockingTrigger(transform.gameObject); // send gameobject(playerobject) that wants to dock to SpaceCraftTurretManager DockingTrigger<>
+                    b_DockObject = true; // set that object is now docked
+                } 
         }
        
+    }
+
+    void Fire(){
+        //Fire
     }
 
     void DockSolarObject() {
@@ -68,24 +73,37 @@ public class PlayerInteract : MonoBehaviour {
     void DockObject()
     {
         sctm_DockingTrigger = go_ObjectToDock.GetComponent<SpaceCraftTurretManager>();
+        
 
         int tn = sctm_DockingTrigger.NumberOfTurrets;
         int tmCount = sctm_DockingTrigger.TurrentManager.Count;
-        
-        if (tn >= tmCount && b_DockObject) // check array
+        int TurretNumber = 0;
+
+        if (!sctm_DockingTrigger.TurrentManager[TurretNumber].TurretInUse && b_DockObject) // check array
         {
-            GameObject Turret = sctm_DockingTrigger.TurrentManager[1].TurretObject;
+            GameObject Turret = sctm_DockingTrigger.TurrentManager[TurretNumber].TurretObject;
             this.transform.parent = Turret.transform;
             tc_EnableTurret = Turret.GetComponent<TurretControl>();
             tc_EnableTurret.TurretEnabled = true;
             Destroy(this.gameObject);
+
+            GameObject go_SwitchTarget = GameObject.FindWithTag("MainCamera");
+            cpf_SwitchTarget = go_SwitchTarget.GetComponent<CameraPlayerFollow>();
+            cpf_SwitchTarget.target = Turret.transform;
+        }
+        else
+        {
+            TurretNumber++;
         }
 
-        // fill array position
-        // store and delete player object
-        // lock camera onto mountable position
-        // load module ie. turret
-    }
+
+   // private GameObject go_SwitchTarget;
+   // CameraPlayerFollow cpf_SwitchTarget;
+    // fill array position
+    // store and delete player object
+    // lock camera onto mountable position
+    // load module ie. turret
+}
 }
 
 

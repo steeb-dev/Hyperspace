@@ -42,7 +42,6 @@ public class GravityManager : MonoBehaviour
             {
                 Vector3 addForce = gi.GetForceAtPosition(objectPosition, mass, gravitational_constant);
                 finalForce += addForce;
-
             }
         }
         return finalForce;

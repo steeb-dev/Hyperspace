@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class GhostMouseLook : MonoBehaviour
+public class GhostMouseLook : MonoBehaviour // not in use atm
 {
 
     void Awake()

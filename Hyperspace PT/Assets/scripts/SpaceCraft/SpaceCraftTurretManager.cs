@@ -7,7 +7,7 @@ public class SpaceCraftTurretManager : MonoBehaviour {
     public int NumberOfTurrets = 0;
     public GameObject go_SpaceCraftToDock;
     public GameObject go_DockingTrigger;
-    public List<Turret> TurrentManager = new List<Turret>();
+    public List<CraftObjectTurret> TurrentManager = new List<CraftObjectTurret>();
 
     void Start () {
         TurrentManager.Clear();
@@ -16,7 +16,7 @@ public class SpaceCraftTurretManager : MonoBehaviour {
             if (child.tag == "Turret")
             {
                 NumberOfTurrets++;
-                TurrentManager.Add(new Turret (child.gameObject, false));
+                TurrentManager.Add(new CraftObjectTurret(child.gameObject, false));
             }
         }
     }

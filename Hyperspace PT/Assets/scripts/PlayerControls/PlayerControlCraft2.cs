@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class PlayerControlCraft_ver2 : MonoBehaviour
+public class PlayerControlCraft2 : MonoBehaviour
 {
 	public float power = 500f;
 
