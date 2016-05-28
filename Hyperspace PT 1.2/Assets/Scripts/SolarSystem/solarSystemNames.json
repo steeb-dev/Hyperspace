@@ -1,0 +1,7 @@
+{
+	"solarsystemnames":
+	[
+		{ "id": 0, "systemname": "Babylon", "stars": 1, "planets": 4, "moons": 1 },
+		{ "id": 1, "systemname": "Nineveh", "stars": 1, "planets": 3, "moons": 2 }
+	]
+}
