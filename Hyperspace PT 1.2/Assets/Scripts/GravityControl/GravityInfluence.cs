@@ -4,13 +4,11 @@ using System.Collections;
 public class GravityInfluence : MonoBehaviour
 {
     private Rigidbody m_RigidBody;
+    private GravityManager m_GravityManager;
+
     public bool IsAffectedByGravity;
     public bool AffectsOthers;
     public float Mass;
-
-    private GravityManager m_GravityManager;
-
-
 
     void Start()
     {
@@ -23,17 +21,19 @@ public class GravityInfluence : MonoBehaviour
     {
         if (IsAffectedByGravity)
         {
-            Vector3 newPos = m_GravityManager.GetSummedGravityForceAtPosition(transform.position, Mass);
-            this.m_RigidBody.AddForceAtPosition(newPos.normalized, transform.position);
+            Vector3 newPos = m_GravityManager.GetSummedGravityForceAtPosition(transform.position, Mass); //send summed forced object to be affected position and mass.
+            float distance = Vector3.Distance(this.transform.position, newPos);
+            Vector3 thrustForward = newPos - transform.position; // subtract summed from current position
+           // distance = distance * 1.1f;
+            thrustForward = (thrustForward.normalized * distance * Time.deltaTime);
+            this.m_RigidBody.AddForce(thrustForward);
         }
     }
 
 
     public Vector3 GetForceAtPosition(Vector3 objectPosition, float objectMass, float gravitational_constant)
     {
-
         float distance_squared = (this.transform.position - objectPosition).sqrMagnitude;
-
         float force = gravitational_constant * ((this.Mass * objectMass) / distance_squared);
 
         // apply the force from the player toward the planet

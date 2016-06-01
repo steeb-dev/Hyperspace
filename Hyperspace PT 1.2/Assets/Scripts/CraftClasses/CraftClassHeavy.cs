@@ -3,6 +3,8 @@ using System.Collections;
 
 public class CraftClassHeavy : CraftClassType
 {
+    private GameObject heavyCraft;
+
     public CraftClassHeavy()
     {
         SpaceCraftName = "Heavy";
@@ -16,5 +18,10 @@ public class CraftClassHeavy : CraftClassType
         HardPointElectronic = 2;
         HardPointEngineering = 2;
         HardPointPropulsion = 2;
+    }
+
+    public override void Initialise()
+    {
+       heavyCraft = gameObject.GetComponent<GameObject>();
     }
 }

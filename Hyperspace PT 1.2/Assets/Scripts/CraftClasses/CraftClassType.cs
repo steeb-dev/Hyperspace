@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CraftClassType
+public class CraftClassType : MonoBehaviour
 {
     private string spaceCraftName;
     private float mass;
@@ -69,4 +69,8 @@ public class CraftClassType
         set { hardPointPropulsion = value; }
     }
 
+    public virtual void Initialise()
+    {
+
+    }
 }

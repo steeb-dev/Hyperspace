@@ -6,9 +6,10 @@ using UnityEngine;
 public class GravityManager : MonoBehaviour
 {
     public List<GravityInfluence> m_ActiveGravityInfluences = new List<GravityInfluence>();
-    public float gravitational_constant = 10f;
+    public float gravitational_constant = 100f;
+    private Vector3 gizmoPosition;
 
-    void Start()
+    void Update()
     {
         UpdateGravityEffectors();
     }
@@ -23,7 +24,6 @@ public class GravityManager : MonoBehaviour
             if (gi.AffectsOthers)
             {
                 m_ActiveGravityInfluences.Add(gi);
-                Debug.Log(gi.transform.name);
             }
         }
     }
@@ -45,8 +45,13 @@ public class GravityManager : MonoBehaviour
                 finalForce += addForce;
             }
         }
+        gizmoPosition = finalForce;
         return finalForce;
     }
 
-
+    void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawCube(gizmoPosition, new Vector3(1, 1, 1));
+    }
 }

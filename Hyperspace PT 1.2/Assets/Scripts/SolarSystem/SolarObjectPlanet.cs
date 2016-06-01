@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using UnityEngine;  
 
-public class SolarObjectPlanet : SolarSystemType
-{
+public class SolarObjectPlanet : SolarObjectType
+{ 
     public int minSize;    public int maxSize;
     public int minMass;    public int maxMass;
 
-    public int hardPoint;
+    public int mountPoint = 2;
     public int maxResource;
     public int planetGass;
     public int planetMineral;
@@ -17,10 +17,10 @@ public class SolarObjectPlanet : SolarSystemType
 
     private GravityInfluence m_GravityInfluence;
 
-    public int HardPoint
+    public int MountPoint
     {
-        get { return hardPoint; }
-        set { hardPoint = value; }
+        get { return mountPoint; }
+        set { mountPoint = value; }
     }
 
     public int MaxResource

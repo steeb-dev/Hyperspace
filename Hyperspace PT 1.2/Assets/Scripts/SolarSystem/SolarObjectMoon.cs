@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using UnityEngine;
 
-public class SolarObjectMoon : SolarSystemType
+public class SolarObjectMoon : SolarObjectType
 {
     public int minSize; public int maxSize;
     public int minMass; public int maxMass;

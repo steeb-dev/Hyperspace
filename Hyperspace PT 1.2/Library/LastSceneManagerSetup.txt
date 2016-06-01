@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Scenes/SolarSystem.unity
+- path: Assets/Scenes/SolarSystemTEST.unity
   isLoaded: 1
   isActive: 1

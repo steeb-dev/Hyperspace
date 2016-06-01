@@ -3,6 +3,8 @@ using System.Collections;
 
 public class CraftClassLight : CraftClassType
 {
+    private GameObject lightCraft;
+
     public CraftClassLight()
     {
         SpaceCraftName = "Light";
@@ -16,5 +18,10 @@ public class CraftClassLight : CraftClassType
         HardPointElectronic = 1;
         HardPointEngineering = 1;
         HardPointPropulsion = 1;
+    }
+
+    public override void Initialise()
+    {
+        lightCraft = gameObject.GetComponent<GameObject>();
     }
 }

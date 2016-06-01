@@ -57,9 +57,6 @@ public class SelectCraft : MonoBehaviour {
                 PrintData(craftClass);
                 switchCraft = 1;
                 break;
-        }        
+        }
     }
-
-    
-
 }

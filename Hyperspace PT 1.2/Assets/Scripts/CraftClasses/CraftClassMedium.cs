@@ -3,6 +3,8 @@ using System.Collections;
 
 public class CraftClassMedium : CraftClassType
 {
+    private GameObject mediumCraft;
+
     public CraftClassMedium()
     {
         SpaceCraftName = "Medium";
@@ -16,5 +18,10 @@ public class CraftClassMedium : CraftClassType
         HardPointElectronic = 1;
         HardPointEngineering = 1;
         HardPointPropulsion = 2;
+    }
+
+    public override void Initialise()
+    {
+        mediumCraft = gameObject.GetComponent<GameObject>();
     }
 }

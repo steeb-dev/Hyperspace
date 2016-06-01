@@ -16,7 +16,6 @@ public class SolarSystemGenerator : MonoBehaviour {
     public SolarSystemObject[] StarPrefabs;
     public SolarSystemObject[] PlanetPrefabs;
     public SolarSystemObject[] MoonPrefabs;
-  //  private SolarSystemObject solarSystemData = new SolarSystemObject();
 
     //xy bounds assuming min of 0
     public xzBounds starBounds;
@@ -50,9 +49,6 @@ public class SolarSystemGenerator : MonoBehaviour {
         maxPlanets = (int)ssData["solarsystemnames"][ssItem]["planets"];
         maxMoons = (int)ssData["solarsystemnames"][ssItem]["moons"];
         solarsystemName = (string)ssData["solarsystemnames"][ssItem]["systemname"];
-        Debug.Log(maxStars);
-        Debug.Log(maxPlanets);
-        Debug.Log(maxMoons);
     }
 
     // Use this for initialization
@@ -103,5 +99,6 @@ public class SolarSystemGenerator : MonoBehaviour {
             //Initialise
             newSolarSystemObject.Initialise(random);
         }
+
     }
 }
