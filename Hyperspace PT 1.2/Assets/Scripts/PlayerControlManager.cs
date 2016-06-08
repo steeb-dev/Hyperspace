@@ -64,7 +64,7 @@ public class PlayerControlManager : MonoBehaviour
         float calc = (distance / distancedifference);
       
         newPos = (newPos * calc / 2);
-        Debug.Log("OrbitAroundTarget: newPos: " + newPos);
+       // Debug.Log("OrbitAroundTarget: newPos: " + newPos);
 
         newPos.y = 0;
         spaceCraftRigidBody.AddForce(newPos);
