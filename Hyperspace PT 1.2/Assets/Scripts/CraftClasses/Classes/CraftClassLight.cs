@@ -12,7 +12,7 @@ public class CraftClassLight : CraftClassType
         CraftDescription = "Fast, Light and Agile";
         //    CraftPrefab = lightCraft;
         Mass = 1;
-        Propulsion = 500;
+        Propulsion = 200;
         MaxEnergy = 800;
         EnergyRechargeRate = 1.1f;
         PowerGrid = 10;

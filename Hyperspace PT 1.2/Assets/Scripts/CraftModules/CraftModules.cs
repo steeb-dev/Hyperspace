@@ -50,6 +50,7 @@ public class CraftModules
     public float ModuleCooldown
     {
         get { return cooldown; }
+        set { cooldown = value; }
     }
 
     public List<ModuleActions> ModuleAction

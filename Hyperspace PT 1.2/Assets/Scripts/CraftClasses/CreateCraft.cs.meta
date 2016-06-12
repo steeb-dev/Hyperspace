@@ -1,10 +1,13 @@
 fileFormatVersion: 2
 guid: d2a2d829470956143afab679022e84ce
-timeCreated: 1464931060
+timeCreated: 1465445584
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - lightCraft: {fileID: 102614, guid: b00ce3deda3b13c4f908ad181472a26a, type: 2}
+  - mediumCraft: {fileID: 102614, guid: 5e7edb901bcd82240acff7a30689b73f, type: 2}
+  - heavyCraft: {fileID: 102614, guid: 2b762581c7aac1246a73db400525171e, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

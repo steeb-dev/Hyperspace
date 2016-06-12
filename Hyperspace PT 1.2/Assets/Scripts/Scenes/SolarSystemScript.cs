@@ -5,6 +5,6 @@ public class SolarSystemScript : MonoBehaviour {
 
     void Start()
     {
-        LoadInformation.LoadAllInformation();        
+        LoadInformation.LoadAllInformation();
     }
 }

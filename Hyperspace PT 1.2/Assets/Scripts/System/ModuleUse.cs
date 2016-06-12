@@ -1,47 +1,63 @@
 ﻿using UnityEngine;
 using System.Collections;
-using UnityEngine.UI;
-using System.Diagnostics;
 
-public class ModuleUse : MonoBehaviour {
-
-    public GameObject offensiveMisslePrefab;
+public class ModuleUse : MonoBehaviour
+{
     private OffensiveMissle om;
-    private Stopwatch moduleCooldownTimer;
-    private Button button;
-    private Image fillImage;
+    private OffensiveEnergy eom;
+    private PrefabLoader modulePrefab;
+    private GameObject prefabFactory;
 
-    public void OnModuleUse(GameObject btn)
+    private GameObject button;
+    private ModuleIcons icon;
+
+    public void Awake()
     {
-        fillImage = btn.transform.GetChild(0).gameObject.GetComponent<Image>();
-        button = btn.GetComponent<Button>();
-        button.interactable = false;
-        fillImage.fillAmount = 1;
-        moduleCooldownTimer = new Stopwatch();
-        moduleCooldownTimer.Start();
         
-
-        GameObject go = Instantiate<GameObject>(offensiveMisslePrefab);
-        go.transform.position = this.transform.position;
-        om = new OffensiveMissle();
-        om.ModulePrefab = go;
-        om.UseModule(this.gameObject);
-
-        StartCoroutine(SpinImage());
     }
 
-    private IEnumerator SpinImage()
+    public void EUse(GameObject craftOBJ)
     {
-        while (moduleCooldownTimer.IsRunning && moduleCooldownTimer.Elapsed.TotalSeconds < om.ModuleCooldown)
-        {
-            fillImage.fillAmount = ((float)moduleCooldownTimer.Elapsed.TotalSeconds / om.ModuleCooldown);
-            yield return null;
-        }
-        fillImage.fillAmount = 0;
-        button.interactable = true;
-        moduleCooldownTimer.Stop();
-        moduleCooldownTimer.Reset();
+        
 
-        yield return null;
+        prefabFactory = GameObject.FindGameObjectWithTag("GameManager");
+        modulePrefab = prefabFactory.GetComponent<PrefabLoader>();
+
+        GameObject ghost = GameObject.Find("ModulePoint");
+       
+        GameObject go = Instantiate(modulePrefab.moduleObjects[0], ghost.transform.position, ghost.transform.rotation) as GameObject;
+
+        Vector3 v = ghost.transform.forward * 15;
+        v += craftOBJ.GetComponent<Rigidbody>().velocity;
+        go.GetComponent<Rigidbody>().velocity = v;
+
+        om = new OffensiveMissle();
+        om.ModulePrefab = go;
+        om.UseModule(ghost.gameObject);
+
+        prefabFactory = GameObject.Find("EButton");
+        icon = prefabFactory.GetComponent<ModuleIcons>();
+        icon.OnUseModule();
+
+    }
+
+    public void FUse(GameObject craftOBJ)
+    {
+        prefabFactory = GameObject.FindGameObjectWithTag("GameManager");
+        modulePrefab = prefabFactory.GetComponent<PrefabLoader>();
+
+        GameObject ghost = GameObject.Find("ModulePoint");
+
+
+        GameObject go = Instantiate(modulePrefab.moduleObjects[1], ghost.transform.position, ghost.transform.rotation) as GameObject;
+
+        Vector3 v = ghost.transform.forward * 15;
+        v += craftOBJ.GetComponent<Rigidbody>().velocity;
+        go.GetComponent<Rigidbody>().velocity = v;
+
+        eom = new OffensiveEnergy();
+        eom.ModulePrefab = go;
+        eom.UseModule(ghost.gameObject);
+
     }
 }

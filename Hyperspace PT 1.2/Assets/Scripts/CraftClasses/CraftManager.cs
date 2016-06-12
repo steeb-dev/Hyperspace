@@ -9,14 +9,16 @@ using System.Collections;
 public class CraftManager : MonoBehaviour
 {
     private string pilotName;
+    private CraftClassType craft;
+    private float mass;
     private int bounty;
     private float energy;
     private float energyRate;
+    private float propulsion;
     private int power;
-    private int cargo;
-    private CraftClassType craft;
     private CraftModules module;
     private int hCredit; // hyper credit
+    private int cargo;
 
 
 
@@ -134,6 +136,32 @@ public class CraftManager : MonoBehaviour
         set
         {
             module = value;
+        }
+    }
+
+    public float Mass
+    {
+        get
+        {
+            return mass;
+        }
+
+        set
+        {
+            mass = value;
+        }
+    }
+
+    public float Propulsion
+    {
+        get
+        {
+            return propulsion;
+        }
+
+        set
+        {
+            propulsion = value;
         }
     }
 }
