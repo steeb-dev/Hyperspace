@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/0_Main.unity
+- path: Assets/1_CraftSetup2.unity
   isLoaded: 1
   isActive: 1

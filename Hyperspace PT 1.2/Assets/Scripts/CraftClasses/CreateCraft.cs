@@ -6,7 +6,6 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.SceneManagement;
-using UnityEngine.Networking;
 
 public class CreateCraft : MonoBehaviour
 {
@@ -21,8 +20,6 @@ public class CreateCraft : MonoBehaviour
 
         craftPrefab = gameObject.GetComponent<PrefabLoader>();
         GameObject setCraft = (GameObject)Instantiate(craftPrefab.PlayerSphere);
-
-        NetworkServer.Spawn(setCraft);
 
         CreateNewPilot();
 

@@ -14,7 +14,7 @@ public class ButtonObjects : MonoBehaviour {
         {
             if (buttonDown == "Login")
             {
-                SceneManager.LoadScene("1_CraftSetup");
+                SceneManager.LoadScene("1_CraftSetup2");
             }
             if (buttonDown == "Exit")
             {
