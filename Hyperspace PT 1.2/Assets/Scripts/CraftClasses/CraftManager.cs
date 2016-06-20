@@ -8,20 +8,32 @@ using System.Collections;
 [System.Serializable]
 public class CraftManager : MonoBehaviour
 {
+    [SerializeField]
     private string pilotName;
+    [SerializeField]
     private CraftClassType craft;
+    [SerializeField]
     private float mass;
+    [SerializeField]
     private int bounty;
+    [SerializeField]
     private float energy;
+    [SerializeField]
+    private float maxEnergy;
+    [SerializeField]
     private float energyRate;
+    [SerializeField]
     private float propulsion;
+    [SerializeField]
     private int power;
+    [SerializeField]
     private CraftModules module;
+    [SerializeField]
     private int hCredit; // hyper credit
+    [SerializeField]
     private int cargo;
 
-
-
+    
     public string PilotName
     {
         get
@@ -162,6 +174,19 @@ public class CraftManager : MonoBehaviour
         set
         {
             propulsion = value;
+        }
+    }
+
+    public float MaxEnergy
+    {
+        get
+        {
+            return maxEnergy;
+        }
+
+        set
+        {
+            maxEnergy = value;
         }
     }
 }

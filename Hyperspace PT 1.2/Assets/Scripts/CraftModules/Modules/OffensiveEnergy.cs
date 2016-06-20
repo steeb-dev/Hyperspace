@@ -11,8 +11,7 @@ public class OffensiveEnergy : CraftModules {
     public OffensiveEnergy() 
         : base(new ObjectInformation(aName, aDescription, aIcon))
     {
-        this.ModuleAction.Add(new Ranged(100f));
-       // this.ModuleAction.Add(new AreaOfEffect(1.5f, 1f, 50f));
-       // this.ModuleAction.Add(new DamageOverTime(2f, 5f, 1f));
+        EnergyUse = 20;
+        this.ModuleAction.Add(new Ranged(100f, 15));
     }
 }

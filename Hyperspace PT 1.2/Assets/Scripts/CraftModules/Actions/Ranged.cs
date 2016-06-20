@@ -8,13 +8,14 @@ public class Ranged : ModuleActions
     private const string abName = "Ranged";
     private const string abDescription = "a ranged attack";
     private const ActionTimes actionTime = ActionTimes.Start;
+    private float objectVelocity;
+    private float objectRange;
 
-    private float lifeDistance;
-
-    public Ranged(float lifeDist)
+    public Ranged(float range, float velocity)
         : base(new ObjectInformation(abName, abDescription), actionTime)
     {
-        lifeDistance = lifeDist;
+        objectRange = range;
+        objectVelocity = velocity;
     }
 
     public override void Action(GameObject playerObject, GameObject modulePrefab)
@@ -25,12 +26,11 @@ public class Ranged : ModuleActions
     private IEnumerator CheckDistance(Vector3 startPosition, GameObject modulePrefab)
     {
         float tempDistance = Vector3.Distance(startPosition, modulePrefab.transform.position);
-        while (tempDistance < lifeDistance)
+        while (tempDistance < objectRange)
         {
             tempDistance = Vector3.Distance(startPosition, modulePrefab.transform.position);
             yield return null;
         }
-        //this.gameObject.SetActive(false);
        GameObject.Destroy(modulePrefab);
 
         yield return null;

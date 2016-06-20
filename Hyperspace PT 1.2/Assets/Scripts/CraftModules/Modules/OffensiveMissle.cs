@@ -12,7 +12,8 @@ public class OffensiveMissle : CraftModules {
         : base(new ObjectInformation(aName, aDescription, aIcon))
     {
         ModuleCooldown = .5f;
-        this.ModuleAction.Add(new Ranged(100f));
+        EnergyUse = 50;
+        this.ModuleAction.Add(new Ranged(100f, 15));
        // this.ModuleAction.Add(new AreaOfEffect(1.5f, 1f, 50f));
        // this.ModuleAction.Add(new DamageOverTime(2f, 5f, 1f));
     }

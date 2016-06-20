@@ -9,6 +9,7 @@ public class PrefabLoader : MonoBehaviour {
     public GameObject[] solarObjects;
     public GameObject[] moduleObjects;
     public GameObject[] stationObjects;
+    public GameObject[] moduleIcons;
     public Text pilotName;
 
 }

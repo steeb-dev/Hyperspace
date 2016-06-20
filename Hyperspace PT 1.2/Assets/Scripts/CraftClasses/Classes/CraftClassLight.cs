@@ -14,7 +14,7 @@ public class CraftClassLight : CraftClassType
         Mass = 1;
         Propulsion = 200;
         MaxEnergy = 800;
-        EnergyRechargeRate = 1.1f;
+        EnergyRechargeRate = .5f;
         PowerGrid = 10;
         CargoHold = 10;
         HardPointOffensive = 2;

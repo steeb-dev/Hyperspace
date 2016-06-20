@@ -12,44 +12,23 @@ public class CreateCraft : MonoBehaviour
     private CraftManager newCraft;
     private PrefabLoader craftPrefab;
 
-
-    void Start()
+    void Awake()
     {
-
-        newCraft = new CraftManager();
-
         craftPrefab = gameObject.GetComponent<PrefabLoader>();
-        GameObject setCraft = (GameObject)Instantiate(craftPrefab.PlayerSphere);
+        GameObject setCockpit = (GameObject)Instantiate(craftPrefab.PlayerSphere);
+
+        GameObject playerObject = new GameObject();
+        setCockpit.transform.SetParent(playerObject.transform);
+        newCraft = setCockpit.gameObject.AddComponent<CraftManager>();
 
         CreateNewPilot();
 
-        setCraft.transform.name = GameInformation.PilotName + "'s Cockpit" ;
+        playerObject.transform.name = GameInformation.PilotName;
+        setCockpit.transform.name = GameInformation.PilotName + "'s Cockpit" ;
 
         StorePlayerInfo();
-
-        SetCameraFollow(setCraft.transform);
-
         SaveInformation.SaveAllInformation();
     }
-
-   /* public GameObject SpawnCraft(CraftClassType craft)
-    {
-        craftPrefab = gameObject.GetComponent<PrefabLoader>();
-
-        if (craft.SpaceCraftName == "Light")
-            {
-                return craftPrefab.spaceCraft[0];
-        }
-        if (craft.SpaceCraftName == "Medium")
-            {
-                return craftPrefab.spaceCraft[1];
-        }
-        if (craft.SpaceCraftName == "Heavy")
-            {
-                return craftPrefab.spaceCraft[2];
-        }
-        return null;
-    }*/
 
       private void CreateNewPilot()
     {
@@ -59,21 +38,20 @@ public class CreateCraft : MonoBehaviour
         newCraft.Bounty = 0;
         newCraft.Energy = newCraft.Craft.MaxEnergy;
         newCraft.EnergyRate = newCraft.Craft.EnergyRechargeRate;
+        newCraft.MaxEnergy = newCraft.Craft.MaxEnergy;
         newCraft.Power = newCraft.Craft.PowerGrid;
+        newCraft.Propulsion = newCraft.Craft.Propulsion;
         newCraft.Cargo = newCraft.Craft.CargoHold;
         newCraft.HCredit = 100;
-    }
-
-    void SetCameraFollow(Transform __target)
-    {
-        GameObject findCamera = GameObject.FindGameObjectWithTag("MainCamera");
-        findCamera.GetComponent<CameraFollow>().target = __target;
-    }
+}
 
     private void StorePlayerInfo()
     {
+        GameInformation.PilotName = newCraft.PilotName;
+        GameInformation.Craft = newCraft.Craft;
         GameInformation.Mass = newCraft.Craft.Mass;
         GameInformation.Bounty = newCraft.Bounty;
+        GameInformation.MaxEnergy = newCraft.MaxEnergy;
         GameInformation.Energy = newCraft.Energy;
         GameInformation.EnergyRate = newCraft.EnergyRate;
         GameInformation.Power = newCraft.Power;

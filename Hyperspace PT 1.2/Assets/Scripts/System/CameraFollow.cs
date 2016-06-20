@@ -7,13 +7,12 @@ public class CameraFollow : MonoBehaviour
 
     void LateUpdate()
     {
-        if (!target)
-            return;
+        target = this.transform.parent.gameObject.transform;
 
-        float currentHeight = transform.position.y;
+        //float currentHeight = transform.position.y;
 
         transform.position = target.position;
-        transform.position = new Vector3(transform.position.x, currentHeight, transform.position.z);
+        transform.position = new Vector3(transform.position.x, 50, transform.position.z);
         transform.LookAt(target);
     }
 }

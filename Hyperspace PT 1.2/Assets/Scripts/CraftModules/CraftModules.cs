@@ -12,7 +12,7 @@ public class CraftModules
     private bool selfCast;
     private float cooldown;
     private GameObject modulePrefab;
-    private float energyUsed;
+    private float energyUse;
 
     public enum ModuleTypes
     {
@@ -75,6 +75,19 @@ public class CraftModules
         set
         {
             moduleType = value;
+        }
+    }
+
+    public float EnergyUse
+    {
+        get
+        {
+            return energyUse;
+        }
+
+        set
+        {
+            energyUse = value;
         }
     }
 
